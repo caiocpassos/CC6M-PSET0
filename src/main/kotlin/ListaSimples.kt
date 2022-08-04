@@ -34,6 +34,43 @@ object ListaSimples {
         }
     }
 
+    fun adicionarOrdenado(valor: Int) {
+        var auxiliar = head
+        val nodeNovo = Node(valor)
+        var anterior = head
+
+
+        //Adicionar no primeiro caso a lista seja vazia
+        if (estaVazia()) {
+            head = nodeNovo
+            count++
+            return
+        }
+
+        //Adicionar no inínio caso o número seja o menor
+        if (auxiliar!!.valor >= nodeNovo.valor) {
+            nodeNovo.next = auxiliar
+            head = nodeNovo
+            return
+        }
+
+        //Percorre a lista enquanto não encontrar a posição do número
+        while (auxiliar != null && auxiliar.valor < nodeNovo.valor) {
+            anterior = auxiliar
+            auxiliar = auxiliar.next
+        }
+
+        //Adiciona o número na posição devida
+        if(auxiliar != null) {
+            anterior?.next = nodeNovo
+            nodeNovo.next = auxiliar
+        } else {
+            anterior?.next = nodeNovo
+        }
+
+
+    }
+
     fun ordenar() {
         if (estaVazia()) {
             return
